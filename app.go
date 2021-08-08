@@ -26,7 +26,7 @@ func makeApp() *cli.App {
 			{
 				Name:    "decrypt",
 				Aliases: []string{"de", "d"},
-				Usage:   "decrypt the given file",
+				Usage:   "decrypt the given file and outputs to stdout (on failure outputs nothing)",
 				Action:  decryptMain,
 			},
 		},
