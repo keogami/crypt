@@ -20,7 +20,7 @@ func makeApp() *cli.App {
 			{
 				Name:    "encrypt",
 				Aliases: []string{"en", "e"},
-				Usage:   "encrypt the given file",
+				Usage:   "encrypt the given file and outputs to stdout",
 				Action:  encryptMain,
 			},
 			{

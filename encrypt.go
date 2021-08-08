@@ -53,12 +53,7 @@ func encryptMain(c *cli.Context) error {
 
 	cipher := gcm.Seal(nil, nonce, plain, nil)
 
-	outname := fname + ".crypt"
-	output, err := os.Create(outname)
-	if err != nil {
-		return err
-	}
-	defer output.Close()
+	output := os.Stdout
 
 	outb := append(nonce, cipher...)
 	_, err = output.Write(outb)
