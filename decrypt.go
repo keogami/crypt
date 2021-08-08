@@ -53,6 +53,10 @@ func decryptMain(c *cli.Context) error {
 		return err
 	}
 
-	fmt.Println(string(plain))
-	return nil
+	path := c.Path(outputOption)
+	if path == "" {
+		fmt.Println(string(plain))
+		return nil
+	}
+	return writeOutput(plain, path)
 }

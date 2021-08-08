@@ -4,6 +4,7 @@ import (
 	"crypto/aes"
 	"crypto/cipher"
 	"crypto/rand"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"os"
@@ -53,13 +54,13 @@ func encryptMain(c *cli.Context) error {
 
 	cipher := gcm.Seal(nil, nonce, plain, nil)
 
-	output := os.Stdout
-
 	outb := append(nonce, cipher...)
-	_, err = output.Write(outb)
-	if err != nil {
+	path := c.Path(outputOption)
+
+	if path == "" {
+		fmt.Println(string(outb))
 		return nil
 	}
 
-	return nil
+	return writeOutput(outb, path)
 }
