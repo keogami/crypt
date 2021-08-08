@@ -13,10 +13,12 @@ const (
 	ExitPassEmpty = iota + 1
 	ExitNoArgs
 	ExitNoOutputPath
+	ExitAuthFailed
 )
 
 var (
 	ErrPassEmpty    = cli.Exit("password is empty", ExitPassEmpty)
 	ErrNoArgs       = cli.Exit("not enough argument provided", ExitNoArgs)
 	ErrNoOutputPath = cli.Exit("no output path provided with empty passphrase", ExitNoOutputPath)
+	ErrAuthFailed   = cli.Exit("Authentication failed", ExitAuthFailed)
 )

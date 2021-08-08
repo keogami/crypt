@@ -50,7 +50,10 @@ func decryptMain(c *cli.Context) error {
 
 	plain, err := gcm.Open(nil, nonce, cipher, nil)
 	if err != nil {
-		return err
+		if err.Error() != "cipher: message authentication failed" {
+			return err
+		}
+		return ErrAuthFailed
 	}
 
 	path := c.Path(outputOption)
