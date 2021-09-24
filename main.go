@@ -6,9 +6,7 @@ import (
 	"golang.org/x/crypto/scrypt"
 )
 
-// Todo(keogami): generate a random salt for key derivation
-func passToKey(pass string) ([]byte, error) {
-	salt := []byte("")
+func passToKey(pass, salt []byte) ([]byte, error) {
 	return scrypt.Key([]byte(pass), salt, 32768, 8, 1, 32)
 }
 

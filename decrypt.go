@@ -30,7 +30,7 @@ func decryptMain(c *cli.Context) error {
 	}
 
 	pass := c.String(passphraseOption)
-	key, err := passToKey(pass)
+	key, err := passToKey([]byte(pass), []byte(""))
 	if err != nil {
 		return err
 	}
