@@ -40,6 +40,12 @@ func makeApp() *cli.App {
 				Required: true,
 			},
 			&cli.PathFlag{
+				Name:     "salt",
+				Usage:    "the file where the salt is to be stored or loaded from",
+				Aliases:  []string{"s"},
+				Required: true,
+			},
+			&cli.PathFlag{
 				Name:    "output",
 				Usage:   "output is the path to the file where the output is stored; it is required if -passphrase is empty",
 				Aliases: []string{"out", "o"},
