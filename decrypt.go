@@ -14,6 +14,9 @@ func decryptMain(c *cli.Context) error {
 	if c.String(passphraseOption) == "" {
 		return ErrPassEmpty
 	}
+	if c.Path(saltOption) == "" {
+		return ErrSaltEmpty
+	}
 	if !c.Args().Present() {
 		return ErrNoArgs
 	}
@@ -30,7 +33,12 @@ func decryptMain(c *cli.Context) error {
 	}
 
 	pass := c.String(passphraseOption)
-	key, err := passToKey([]byte(pass), []byte(""))
+	salt, err := LoadSalt(c.Path(saltOption))
+	if err != nil {
+		return err
+	}
+
+	key, err := passToKey([]byte(pass), salt)
 	if err != nil {
 		return err
 	}

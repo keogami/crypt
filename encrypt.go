@@ -32,7 +32,12 @@ func encryptMain(c *cli.Context) error {
 	}
 
 	pass := c.String(passphraseOption)
-	key, err := passToKey([]byte(pass), []byte(""))
+	salt, err := NewSalt(saltSize)
+	if err != nil {
+		return err
+	}
+
+	key, err := passToKey([]byte(pass), salt)
 	if err != nil {
 		return err
 	}
@@ -60,6 +65,10 @@ func encryptMain(c *cli.Context) error {
 	if path == "" {
 		fmt.Println(string(outb))
 		return nil
+	}
+
+	if err := writeOutput(salt, c.Path(saltOption)); err != nil {
+		return err
 	}
 
 	return writeOutput(outb, path)
