@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
-	"os"
 
 	cli "github.com/urfave/cli/v2"
 )
@@ -20,12 +18,7 @@ func decryptMain(c *cli.Context) error {
 	}
 
 	fname := c.Args().First()
-	input, err := os.Open(fname)
-	if err != nil {
-		return err
-	}
-	defer input.Close()
-	inb, err := ioutil.ReadAll(input)
+	inb, err := ReadFile(fname, ExitArgLoadFailed)
 	if err != nil {
 		return err
 	}

@@ -22,6 +22,7 @@ const (
 	ExitGCMFailed
 	ExitSaltGenFailed
 	ExitSaltLoadFailed
+	ExitArgLoadFailed
 )
 
 var (
