@@ -1,8 +1,6 @@
 package main
 
 import (
-	"crypto/aes"
-	"crypto/cipher"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -33,22 +31,14 @@ func decryptMain(c *cli.Context) error {
 	}
 
 	pass := c.String(passphraseOption)
-	salt, err := LoadSalt(c.Path(saltOption))
-	if err != nil {
-		return err
-	}
 
-	key, err := passToKey([]byte(pass), salt)
-	if err != nil {
-		return err
-	}
-
-	aesCipher, err := aes.NewCipher(key)
-	if err != nil {
-		return err
-	}
-
-	gcm, err := cipher.NewGCM(aesCipher)
+	gcm, _, err := NewAESGCM(pass, func() (Salt, error) {
+		s, err := LoadSalt(c.Path(saltOption))
+		if err != nil {
+			return nil, ErrSaltLoadFailed
+		}
+		return s, nil
+	})
 	if err != nil {
 		return err
 	}
