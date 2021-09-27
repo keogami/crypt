@@ -26,7 +26,7 @@ func (s Salt) Store(filename string) error {
 
 // Load loads the Salt from the given file
 func LoadSalt(filename string) (Salt, error) {
-	buffer, err := os.ReadFile(filename)
+	buffer, err := ReadFile(filename, ExitSaltLoadFailed)
 	if err != nil {
 		return Salt{}, err
 	}

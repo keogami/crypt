@@ -26,11 +26,7 @@ func decryptMain(c *cli.Context) error {
 	pass := c.String(passphraseOption)
 
 	gcm, _, err := NewAESGCM(pass, func() (Salt, error) {
-		s, err := LoadSalt(c.Path(saltOption))
-		if err != nil {
-			return nil, ErrSaltLoadFailed
-		}
-		return s, nil
+		return LoadSalt(c.Path(saltOption))
 	})
 	if err != nil {
 		return err
