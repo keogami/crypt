@@ -14,7 +14,7 @@ func NewSalt(len int) (Salt, error) {
 	buffer := make([]byte, len)
 	_, err := rand.Read(buffer)
 	if err != nil {
-		return Salt{}, err
+		return Salt{}, ErrSaltGenFailed
 	}
 	return Salt(buffer), nil
 }

@@ -25,11 +25,7 @@ func encryptMain(c *cli.Context) error {
 	pass := c.String(passphraseOption)
 
 	gcm, salt, err := NewAESGCM(pass, func() (Salt, error) {
-		s, err := NewSalt(saltSize)
-		if err != nil {
-			return nil, ErrSaltGenFailed
-		}
-		return s, nil
+		return NewSalt(saltSize)
 	})
 	if err != nil {
 		return err
