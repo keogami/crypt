@@ -1,4 +1,4 @@
-module crypt
+module github.com/keogami/crypt
 
 go 1.15
 
