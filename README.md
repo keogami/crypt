@@ -34,7 +34,7 @@ COMMANDS:
 GLOBAL OPTIONS:
    --passphrase value, --pass value, -p value  passphrase to be used for operations; if empty, you will be prompted to type it in
    --salt value, -s value                      the file where the salt is to be stored or loaded from
-   --output value, --out value, -o value       output is the path to the file where the output is stored; it is required if -passphrase is empty
+   --output value, --out value, -o value       output is the path to the file where the output is stored, defaults to stdout
    --help, -h                                  show help (default: false)
 ```
 
@@ -59,7 +59,7 @@ This will generate two new files:
 
 Now you can safely delete the original file ;3
 
-NOTE: To avoid compromising your passphrase, supply an empty string to `-p` and `crypt` will prompt you to enter your password.
+NOTE: To avoid compromising your passphrase, omit `-p` or supply an empty string to `-p` and `crypt` will prompt you to enter your password.
 ```
 crypt -p "" -o output.enc -s output.salt encrypt mysecretfile.txt
 ```
