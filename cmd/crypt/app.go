@@ -13,16 +13,14 @@ func inputPassphrase(ctx *cli.Context) error {
 		return nil
 	}
 
-	if !ctx.IsSet("output") {
-		return ErrNoOutputPath
-	}
-
 	fmt.Print("Input Passphrase: ")
 
 	p, err := term.ReadPassword(int(os.Stdin.Fd()))
 	if err != nil {
 		return nil
 	}
+
+  fmt.Println("") // adds a new line after the input is received
 
 	return ctx.Set("passphrase", string(p))
 }
@@ -47,7 +45,7 @@ func makeApp() *cli.App {
 			},
 			&cli.PathFlag{
 				Name:    "output",
-				Usage:   "output is the path to the file where the output is stored; it is required if -passphrase is empty",
+				Usage:   "output is the path to the file where the output is stored, defaults to stdout",
 				Aliases: []string{"out", "o"},
 			},
 		},
