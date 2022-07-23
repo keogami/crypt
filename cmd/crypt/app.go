@@ -9,7 +9,7 @@ import (
 )
 
 func inputPassphrase(ctx *cli.Context) error {
-	if ctx.String(passphraseOption) != "" {
+	if ctx.IsSet(passphraseOption) && ctx.String(passphraseOption) != "" {
 		return nil
 	}
 
@@ -35,7 +35,6 @@ func makeApp() *cli.App {
 				Name:     "passphrase",
 				Usage:    "passphrase to be used for operations; if empty, you will be prompted to type it in",
 				Aliases:  []string{"pass", "p"},
-				Required: true,
 			},
 			&cli.PathFlag{
 				Name:     "salt",
